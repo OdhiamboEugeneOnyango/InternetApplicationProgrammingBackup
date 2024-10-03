@@ -155,3 +155,11 @@ public function delete($table,$where){
     }
         return $this->extracted($sth);
 }
+
+/**************************************************************************************************
+ * Truncate Query (extracted) Method
+ ***************************************************************************************************/
+public function truncate($table){
+    $sth = "TRUNCATE $table";
+    return $this->extracted($sth);
+}
