@@ -81,3 +81,31 @@ public function count_results($sql){
             break;
     }
 }
+
+/**************************************************************************************************
+ * Insert Query Method
+ ***************************************************************************************************/
+public function insert($table, $data){
+    ksort($data);
+    $fieldDetails = NULL;
+    $fieldNames = implode('`, `',  array_keys($data));
+    $fieldValues = implode("', '",  array_values($data));
+    $sth = "INSERT INTO $table (`$fieldNames`) VALUES ('$fieldValues')";
+    return $this->extracted($sth);
+}
+/**************************************************************************************************
+* Select Query From a DataBase Method
+***************************************************************************************************/
+public function select($sql){
+    switch ($this->db_type) {
+        case 'PDO':
+            $result = $this->connection->prepare($sql);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC)[0];
+            break;
+        case 'MySQLi':
+            $result = $this->connection->query($sql);
+            return $result->fetch_assoc();
+            break;
+    }
+}
