@@ -13,3 +13,5 @@ class user_forms{
             <form action="<?php print basename($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="fullname" class="form-label">Fullname:</label>
+
+                    
