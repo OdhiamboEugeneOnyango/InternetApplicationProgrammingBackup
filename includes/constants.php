@@ -163,3 +163,48 @@ public function truncate($table){
     $sth = "TRUNCATE $table";
     return $this->extracted($sth);
 }
+
+/**************************************************************************************************
+ * Get ID of Last Inserted Record Method
+ ***************************************************************************************************/
+public function last_id(){
+    switch ($this->db_type) {
+    case 'PDO':
+            return $this->connection->lastInsertId();
+        break;
+    case 'MySQLi':
+        return $this->connection->insert_id;
+    break;
+    }
+}	
+/**************************************************************************************************
+* Extracted (tested) Method
+***************************************************************************************************/
+/**
+ * @param string $sth
+ * @return bool|string|void
+ */
+public function extracted(string $sth)
+{
+    switch ($this->db_type) {
+        case 'PDO':
+            try {
+                // Prepare statement
+                $stmt = $this->connection->prepare($sth);
+                // execute the query
+                $stmt->execute();
+                return TRUE;
+            } catch (PDOException $e) {
+                return $sth . "<br>" . $e->getMessage();
+            }
+            break;
+        case 'MySQLi':
+            if ($this->connection->query($sth) === TRUE) {
+                return TRUE;
+            } else {
+                return "Error: " . $sth . "<br>" . $this->connection->error;
+            }
+            break;
+    }
+}
+}
