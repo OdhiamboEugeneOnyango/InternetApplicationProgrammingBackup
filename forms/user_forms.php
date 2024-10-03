@@ -14,4 +14,5 @@ class user_forms{
                 <div class="mb-3">
                     <label for="fullname" class="form-label">Fullname:</label>
 
+                    <input type="text" name="fullname" class="form-control form-control-lg" maxlength="50" id="fullname" placeholder="Enter your name" <?php print (isset($_SESSION["fullname"])) ? 'value="'.$_SESSION["fullname"].'"'  : ''; unset($_SESSION["fullname"]); ?> >
                     
