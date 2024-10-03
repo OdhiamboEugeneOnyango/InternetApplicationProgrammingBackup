@@ -12,4 +12,5 @@ class SendMail{
 
         //Load Composer's autoloader
     require 'plugins/PHPMailer/vendor/autoload.php';
+    $mail = new PHPMailer(true);
     
