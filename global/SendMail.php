@@ -9,4 +9,7 @@ class SendMail{
 
     //These must be at the top of your script, not inside a function
     public function SendMail($mailMsg){
+
+        //Load Composer's autoloader
+    require 'plugins/PHPMailer/vendor/autoload.php';
     
