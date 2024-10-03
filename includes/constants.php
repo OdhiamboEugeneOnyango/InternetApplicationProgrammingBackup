@@ -135,3 +135,23 @@ public function update($table, $data, $where){
     }
     return $this->extracted($sth);
 }
+
+/**************************************************************************************************
+ * Delete Query (extracted) (tested) Method
+ ***************************************************************************************************/
+public function delete($table,$where){
+    $wer = '';
+    if(is_array($where)){
+        foreach ($where as $clave=>$value){
+            $wer.= $clave."='".$value."' and ";
+        }
+        $wer   = substr($wer, 0, -4);
+        $where = $wer;
+    }
+    if($where==NULL or $where==''){
+        $sth = "DELETE FROM $table";
+    }else{
+        $sth = "DELETE FROM $table WHERE $where";
+    }
+        return $this->extracted($sth);
+}
