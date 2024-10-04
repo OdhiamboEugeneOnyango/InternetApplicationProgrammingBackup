@@ -133,3 +133,14 @@ public function verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
                 $errors['ver_code_expired'] = "Verification code expired";
             }
         }
+       
+        if(!count($errors)){
+            $_SESSION['code_verified'] = $ver_code;
+            header('Location: set_password.php');
+        }else{
+            $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+            $ObjGlob->setMsg('errors', $errors, 'invalid');
+        }
+        }
+    }
+}
