@@ -12,3 +12,8 @@ class layouts{
     <link rel="stylesheet" href="css/style.css">
   
 </head>
+<body>
+        <?php
+    }
+    public function footer(){
+        ?>
