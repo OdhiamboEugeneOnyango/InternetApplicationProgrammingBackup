@@ -60,3 +60,22 @@ $spot_email_address_res = $conn->count_results(sprintf("SELECT email FROM users 
 if ($spot_email_address_res > $exist_count){
     $errors['mailExists_err'] = "Email Already Exists";
 }
+
+// Verify Username Already Exists
+$spot_username_res = $conn->count_results(sprintf("SELECT username FROM users WHERE username = '%s' LIMIT 1", $username));
+if ($spot_username_res > $exist_count){
+    $errors['usernameExists_err'] = "Username Already Exists";
+}
+
+// Verify if username contain letters only
+if (!ctype_alpha($username)) {
+    $errors['usernameLetters_err'] = "Invalid username format. Username must contain letters only";
+}
+
+// Verify that the password is identical to the repeat passsword
+// verify that the password length is between 4 and 8 characters
+if(!count($errors)){
+
+// Implement 2FA (email => PHP-Mailer)
+// ===================================
+// Send email verification with an OTP (OTC)
