@@ -104,3 +104,32 @@ if($insert === TRUE){
     die($insert);
 }
 }else{
+    $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+    $ObjGlob->setMsg('errors', $errors, 'invalid');
+}
+}
+}
+
+public function verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
+    if(isset($_POST["verify_code"])){
+        $errors = array();
+
+        $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]);
+        if(!is_numeric($ver_code)){
+            $errors['not_numeric'] = "Invalid code format. Verification Code must contain numbers only";
+        }
+
+        if(strlen($ver_code) > 6 || strlen($ver_code) < 6){
+            $errors['lenght_err'] = "Invalid code length. Verification Code must have 6 digits";
+        }
+
+        $spot_ver_code_res = $conn->count_results(sprintf("SELECT ver_code FROM users WHERE ver_code = '%d' LIMIT 1", $ver_code));
+
+        if ($spot_ver_code_res != 1){
+            $errors['ver_code_not_exist'] = "Invalid verification code";
+        }else{
+            $spot_ver_code_time_res = $conn->count_results(sprintf("SELECT ver_code, ver_code_time FROM users WHERE ver_code = '%d' AND ver_code_time > now() LIMIT 1", $ver_code));
+            if ($spot_ver_code_time_res != 1){
+                $errors['ver_code_expired'] = "Verification code expired";
+            }
+        }
