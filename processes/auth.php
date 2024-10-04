@@ -79,3 +79,28 @@ if(!count($errors)){
 // Implement 2FA (email => PHP-Mailer)
 // ===================================
 // Send email verification with an OTP (OTC)
+
+
+$cols = ['fullname', 'email', 'username', 'ver_code', 'ver_code_time'];
+$vals = [$fullname, $email_address, $username, $conf['verification_code'], $conf['ver_code_time']];
+$data = array_combine($cols, $vals);
+$insert = $conn->insert('users', $data);
+if($insert === TRUE){
+
+    $replacements = array('fullname' => $fullname, 'email_address' =>
+    $email_address, 'verification_code' => $conf['verification_code'], 'site_full_name' => strtoupper($conf['site_initials']));
+
+    $ObjSendMail->SendMail([
+        'to_name' => $fullname,
+        'to_email' => $email_address,
+        'subject' => $this->bind_to_template($replacements, $lang["AccountVerification"]),
+        'message' => $this->bind_to_template($replacements, $lang["AccRegVer_template"])
+    ]);
+    
+    header('Location: verify_code.php');
+    unset($_SESSION["fullname"], $_SESSION["email_address"], $_SESSION["username"]);
+    exit();
+}else{
+    die($insert);
+}
+}else{
