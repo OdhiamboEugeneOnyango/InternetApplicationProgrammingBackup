@@ -16,3 +16,13 @@ function classAutoLoad($classname){
 
 spl_autoload_register('classAutoLoad');
 
+$ObjGlob = new fncs();
+$ObjSendMail = new SendMail();
+
+// Create instances of all classes
+$ObjLayouts = new layouts();
+$ObjMenus = new menus();
+$ObjHeadings = new headings();
+$ObjCont = new contents();
+$ObjForm = new user_forms();
+
