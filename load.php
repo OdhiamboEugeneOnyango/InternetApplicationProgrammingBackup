@@ -13,3 +13,6 @@ function classAutoLoad($classname){
         }
     }
 }
+
+spl_autoload_register('classAutoLoad');
+
