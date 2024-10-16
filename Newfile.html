@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Light Bulb</title>
+</head>
+<body>
+    
+    <script>
+        document.getElementById('ics').innerHTML = 'This is my first JS';
+        document.getElementById('ics').style.fontSize = '18px';
+        document.getElementById('ics').style.display = 'block';
+        <
+    </script>
+    <br>
+    <script>
+        document.write(54+32);
+    </script>
+    <br>
+    <a href="#" onclick="document.write(254+132)">Click Here</a>
+
+    <p id="ics"></p>
+    <!-- Buttons with mouseover and mouseout events -->
+    <button onclick="document.getElementById('MyImg').src='bulb_on.jpg'" onclick="document.getElementById('MyImg').src='./bulboff.jpeg'">Turn On</button>
+
+    <img src="bulb_off.jpg" width="150px" id="MyImg" alt="Light bulb image" />
+
+    <button onclick="document.getElementById('MyImg').src='bulb_off.jpg'" onclick="document.getElementById('MyImg').src='./bulbon.jpeg'">Turn Off</button>
+
+    <script>
+        console.log(45/15);
+    </script>
+
+    <script>
+        function MyScript(){
+            document.getElementById('ics_D').innerHTML = "This is my second JS line"
+        }
+    </script>
+
+    <span id="ics_D" onclick="MyScript(5, 5);">Next</span>
+    <br>
+    <script>
+        var age = 24;
+        let lastname = 'Okama';
+        const db_name = "ics_d";
+
+        document.write('I am ' + age + ' My name is ' + lastname + ' and');
+
+        if(age > 18)
+        document.write(' I am an adult');
+        else
+        document.write(' I am NOT an adult');
+
+    </script>
+
+</body>
+</html>
