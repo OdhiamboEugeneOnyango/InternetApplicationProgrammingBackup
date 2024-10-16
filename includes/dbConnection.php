@@ -17,6 +17,10 @@
             $this->db_name = $db_name;
             
             $this->connection($db_type, $db_host, $db_port, $db_user, $db_pass, $db_name);
+
+            if($this->connection == null) {
+                throw new Exception("Database connection failed.");
+            }
         }
         public function connection($db_type, $db_host, $db_port, $db_user, $db_pass, $db_name){
             switch($db_type){
